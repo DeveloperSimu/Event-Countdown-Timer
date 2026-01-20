@@ -9,9 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* ===============================
-           GLOBAL RESET
-        =============================== */
         *{
             margin:0;
             padding:0;
@@ -19,133 +16,273 @@
             font-family:'Poppins',sans-serif;
         }
 
-        /* ===============================
-           BODY
-        =============================== */
         body{
             min-height:100vh;
             display:flex;
             flex-direction:column;
             align-items:center;
-            justify-content:center;
+            justify-content:flex-start;
             gap:30px;
-
-            background: #02050a; /* dark background for neon */
+            background: #02050a;
             color:#eaf4ff;
-            overflow:hidden;
+            overflow-x:hidden;
+            padding-top: 40px;
             position:relative;
         }
 
-        /* ===============================
-           CANVAS BUBBLE BACKGROUND
-        =============================== */
         #bubbleCanvas{
             position:fixed;
             top:0;
             left:0;
             width:100%;
             height:100%;
-            z-index:-1; /* behind all content */
+            z-index:-1;
         }
 
-        /* ===============================
-           PAGE TITLE
-        =============================== */
         .page-title{
             font-size:52px;
             font-weight:800;
             letter-spacing:3px;
             text-transform:uppercase;
             text-align:center;
-
             background:linear-gradient(90deg,#4fd2ff,#2f7cff,#00ffe0);
             -webkit-background-clip:text;
             -webkit-text-fill-color:transparent;
-
             text-shadow:0 0 6px rgba(0,180,255,0.5);
-
             position: relative;
             z-index:1;
         }
 
         /* ===============================
-           TIMER CARD
+           TIMERS CONTAINER (grid)
         =============================== */
-        #timer{
-            position:relative;
+        #timersContainer{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:20px;
             width:100%;
-            max-width:460px;
-            padding:44px 38px;
-            border-radius:24px;
-            text-align:center;
-
-            background:rgba(10,20,35,0.95);
-            border:1px solid rgba(0,180,255,0.3);
-
-            box-shadow:0 25px 50px rgba(0,0,0,0.7);
-            z-index:1;
+            padding:0 10px;
+            overflow-y:auto;
         }
 
-        /* ===============================
-           EVENT NAME
-        =============================== */
-        #event{
-            font-size:30px;
+        .timer-card{
+            position:relative;
+            width:260px;
+            padding:20px;
+            border-radius:24px;
+            text-align:center;
+            background:rgba(10,20,35,0.95);
+            border:1px solid rgba(0,180,255,0.3);
+            box-shadow:0 25px 50px rgba(0,0,0,0.7);
+            z-index:1;
+            display:flex;
+            flex-direction:column;
+            justify-content:space-between;
+        }
+
+        .event-name{
+            font-size:22px;
             font-weight:700;
             margin-bottom:8px;
             color:#00b4ff;
             text-shadow:0 0 4px rgba(0,180,255,0.4);
         }
 
-        /* ===============================
-           SUBTITLE
-        =============================== */
         .subtitle{
             font-size:14px;
             letter-spacing:3px;
             text-transform:uppercase;
             color:#6fcfff;
-            margin-bottom:24px;
+            margin-bottom:16px;
         }
 
-        /* ===============================
-           COUNTDOWN DISPLAY
-        =============================== */
-        #countdown{
-            font-size:34px;
+        .countdown{
+            font-size:25px;
             font-weight:600;
-            letter-spacing:3px;
-            padding:18px 22px;
+            letter-spacing:2px;
+            padding:12px 18px;
             border-radius:14px;
-
             background:#081627;
             color:#ffffff;
-
             border:1px solid rgba(0,180,255,0.3);
-
             box-shadow:inset 0 0 10px rgba(0,180,255,0.15);
         }
 
         /* ===============================
-           RESPONSIVE
-        =============================== */
+   PREMIUM EVENT FORM
+================================ */
+.event-form{
+    width:100%;
+    max-width:420px;
+    padding:28px 26px;
+    margin-bottom:40px;
+
+    background:rgba(10,20,35,0.92);
+    backdrop-filter:blur(12px);
+
+    border-radius:20px;
+    border:1px solid rgba(241, 244, 246, 0.35);
+
+    box-shadow:
+        0 25px 50px rgba(0,0,0,0.75),
+        inset 0 0 12px rgba(0,180,255,0.15);
+}
+
+/* form group */
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    margin-bottom:18px;
+}
+
+/* label */
+.form-group label{
+    font-size:13px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#6fd6ff;
+}
+
+/* inputs */
+.event-form input{
+    padding:12px 14px;
+    border-radius:12px;
+
+    background:#07182b;
+    color:#fff;
+
+    border:1px solid rgba(0,180,255,0.35);
+    outline:none;
+
+    font-size:14px;
+    transition:all 0.3s ease;
+}
+
+/* input focus */
+.event-form input:focus{
+    border-color:#00eaff;
+    box-shadow:
+        0 0 12px rgba(0,234,255,0.6),
+        inset 0 0 6px rgba(235, 239, 240, 0.25);
+}
+
+/* add button */
+.add-btn{
+    width:100%;
+    margin-top:10px;
+    padding:14px;
+
+    border-radius:16px;
+    border:none;
+
+    font-size:14px;
+    font-weight:800;
+    letter-spacing:2px;
+    text-transform:uppercase;
+
+    color:#001018;
+    background:linear-gradient(135deg,#00c6ff,#00ffe0);
+
+    cursor:pointer;
+    transition:all 0.35s ease;
+
+    box-shadow:
+        0 12px 30px rgba(0,200,255,0.55);
+}
+
+/* button hover */
+.add-btn:hover{
+    transform:translateY(-3px) scale(1.03);
+    box-shadow:
+        0 18px 45px rgba(0,200,255,0.75);
+}
+
+/* button click */
+.add-btn:active{
+    transform:scale(0.96);
+}
+
+
+        .delete-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:12px;
+    padding:8px 18px;
+
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+
+    color:#fff;
+    background:linear-gradient(135deg,#ff2b2b,#ff004c);
+    border-radius:14px;
+    text-decoration:none;
+
+    border:1px solid rgba(255,255,255,0.15);
+    box-shadow:
+        0 8px 20px rgba(255,0,76,0.35),
+        inset 0 0 10px rgba(255,255,255,0.15);
+
+    cursor:pointer;
+    transition:all 0.3s ease;
+    position:relative;
+    overflow:hidden;
+}
+
+/* Neon glow line animation */
+.delete-btn::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.4),
+        transparent
+    );
+    transition:0.5s;
+}
+
+/* Hover effect */
+.delete-btn:hover{
+    transform:translateY(-2px) scale(1.05);
+    box-shadow:
+        0 12px 30px rgba(255,0,76,0.6),
+        inset 0 0 14px rgba(255,255,255,0.25);
+}
+
+/* Shine animation on hover */
+.delete-btn:hover::before{
+    left:100%;
+}
+
+/* Click effect */
+.delete-btn:active{
+    transform:scale(0.95);
+    box-shadow:
+        0 6px 14px rgba(255,0,76,0.4);
+}
+
         @media(max-width:600px){
-            .page-title{
-                font-size:34px;
-                letter-spacing:1.5px;
+            #timersContainer{
+                gap:15px;
             }
-
-            #timer{
-                padding:30px 24px;
+            .timer-card{
+                width:90%;
+                padding:20px;
             }
-
-            #event{
+            .event-name{
+                font-size:20px;
+            }
+            .countdown{
                 font-size:24px;
-            }
-
-            #countdown{
-                font-size:26px;
-                letter-spacing:2px;
             }
         }
 
@@ -156,94 +293,114 @@
 
     <h1 class="page-title">Event Countdown Timer</h1>
 
-    <div id="timer">
-        <div id="event">{{ data.name }}</div>
-        <div class="subtitle">Time Remaining</div>
+    <!-- ADD EVENT FORM (Django Form) -->
+   <form method="post" class="event-form">
+    {% csrf_token %}
 
-        <div id="countdown">
-            {{ data.hours|stringformat:"02d" }} :
-            {{ data.minutes|stringformat:"02d" }} :
-            {{ data.seconds|stringformat:"02d" }}
+    <div class="form-group">
+        <label>Event Name</label>
+        {{ form.name }}
+    </div>
+
+    <div class="form-group">
+        <label>Event Date</label>
+        {{ form.event_date }}
+    </div>
+
+    <button type="submit" class="add-btn">
+        ➕ Add Event
+    </button>
+</form>
+
+    <!-- TIMERS CONTAINER -->
+    <div id="timersContainer">
+        {% for event in events %}
+        <div class="timer-card">
+            <div class="event-name">{{ event.name }}</div>
+            <div class="subtitle">Time Remaining</div>
+            <div class="countdown" data-time="{{ event.event_date|date:'Y-m-d H:i:s' }}"></div>
+            <a href="{% url 'delete_event' event.id %}" class="delete-btn">Delete</a>
         </div>
+        {% empty %}
+        <p style="text-align:center; color:#aaa;">No events yet!</p>
+        {% endfor %}
     </div>
 
     <canvas id="bubbleCanvas"></canvas>
 
-    <script>
-        /* ===============================
-           COUNTDOWN SCRIPT
-        =============================== */
-        function updateTimer() {
-            const countdown = document.getElementById('countdown');
-            let parts = countdown.textContent.split(':').map(p => parseInt(p.trim()));
+<script>
+    // ===============================
+    // MULTIPLE COUNTDOWN SCRIPT
+    // ===============================
 
-            let [hours, minutes, seconds] = parts;
+    let timers = [];
+    const countdownElements = document.querySelectorAll('.countdown');
+    countdownElements.forEach(c => timers.push(c));
 
-            if (seconds > 0) {
-                seconds--;
-            } else if (minutes > 0) {
-                minutes--;
-                seconds = 59;
-            } else if (hours > 0) {
-                hours--;
-                minutes = 59;
-                seconds = 59;
+    function updateTimers() {
+        const now = new Date().getTime();
+        timers.forEach(c => {
+            let eventTime = new Date(c.dataset.time.replace(' ', 'T')).getTime();
+            let diff = Math.floor((eventTime - now)/1000);
+
+            if(diff < 0) diff = 0;
+
+            const hours = Math.floor(diff / 3600);
+            const minutes = Math.floor((diff % 3600)/60);
+            const seconds = diff % 60;
+
+            c.textContent =
+                String(hours).padStart(2,'0') + ' : ' +
+                String(minutes).padStart(2,'0') + ' : ' +
+                String(seconds).padStart(2,'0');
+        });
+    }
+
+    setInterval(updateTimers, 1000);
+    updateTimers(); // initial update
+
+    // ===============================
+    // BUBBLE BACKGROUND SCRIPT
+    // ===============================
+    const canvas = document.getElementById('bubbleCanvas');
+    const ctx = canvas.getContext('2d');
+    let bubbles = [];
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < 80; i++) {
+        bubbles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 6 + 3,
+            speed: Math.random() * 0.7 + 0.3,
+            alpha: Math.random() * 0.3 + 0.3
+        });
+    }
+
+    function drawBubbles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        bubbles.forEach(b => {
+            ctx.beginPath();
+            ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(0,180,255,${b.alpha})`;
+            ctx.fill();
+            b.y -= b.speed;
+            if (b.y + b.radius < 0) {
+                b.y = canvas.height + b.radius;
+                b.x = Math.random() * canvas.width;
             }
+        });
+        requestAnimationFrame(drawBubbles);
+    }
 
-            countdown.textContent =
-                String(hours).padStart(2, '0') + ' : ' +
-                String(minutes).padStart(2, '0') + ' : ' +
-                String(seconds).padStart(2, '0');
-        }
-
-        setInterval(updateTimer, 1000);
-
-        /* ===============================
-           BUBBLE BACKGROUND SCRIPT
-        =============================== */
-        const canvas = document.getElementById('bubbleCanvas');
-        const ctx = canvas.getContext('2d');
-        let bubbles = [];
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        for (let i = 0; i < 80; i++) {
-            bubbles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                radius: Math.random() * 6 + 3,
-                speed: Math.random() * 0.7 + 0.3,
-                alpha: Math.random() * 0.3 + 0.3
-            });
-        }
-
-        function drawBubbles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            bubbles.forEach(b => {
-                ctx.beginPath();
-                ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(0,180,255,${b.alpha})`;
-                ctx.fill();
-
-                // Move bubble up
-                b.y -= b.speed;
-                if (b.y + b.radius < 0) {
-                    b.y = canvas.height + b.radius;
-                    b.x = Math.random() * canvas.width;
-                }
-            });
-
-            requestAnimationFrame(drawBubbles);
-        }
-
-        drawBubbles();
-    </script>
+    drawBubbles();
+</script>
 
 </body>
 </html>
